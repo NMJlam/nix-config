@@ -1,0 +1,113 @@
+#!/bin/bash
+# Replica of FelixKratz's Jan 2023 bar (github.com/FelixKratz/dotfiles @ 71cd534),
+# driven by AeroSpace instead of yabai. Icons are SF Symbols (font-sf-pro cask).
+source "$CONFIG_DIR/colors.sh"
+PLUGINS="$CONFIG_DIR/plugins"
+FONT="SF Pro"
+P=3
+POPUP_TOGGLE='sketchybar --set $NAME popup.drawing=toggle'
+
+sketchybar --bar height=39 color=$BAR_COLOR shadow=on position=top sticky=on \
+                 padding_left=10 padding_right=10 corner_radius=9 \
+                 y_offset=10 margin=10 blur_radius=20 notch_width=0 \
+           --default updates=when_shown \
+                 icon.font="$FONT:Bold:14.0" icon.color=$WHITE \
+                 label.font="$FONT:Semibold:13.0" label.color=$WHITE \
+                 icon.padding_left=$P icon.padding_right=$P \
+                 label.padding_left=$P label.padding_right=$P \
+                 padding_left=$P padding_right=$P \
+                 background.height=30 background.corner_radius=9 \
+                 popup.background.border_width=2 popup.background.corner_radius=9 \
+                 popup.background.border_color=$WHITE popup.background.color=$BLACK \
+                 popup.background.shadow.drawing=on
+
+# ---- Left ----
+
+POPUP_OFF='sketchybar --set apple.logo popup.drawing=off'
+sketchybar --add item apple.logo left \
+  --set apple.logo icon=􀣺 icon.font="$FONT:Black:16.0" icon.color=$GREEN \
+        padding_right=15 label.drawing=off click_script="$POPUP_TOGGLE" \
+  --add item apple.prefs popup.apple.logo \
+  --set apple.prefs icon=􀺽 label="Preferences" \
+        click_script="open -a 'System Settings'; $POPUP_OFF" \
+  --add item apple.activity popup.apple.logo \
+  --set apple.activity icon=􀒓 label="Activity" \
+        click_script="open -a 'Activity Monitor'; $POPUP_OFF" \
+  --add item apple.lock popup.apple.logo \
+  --set apple.lock icon=􀒳 label="Lock Screen" \
+        click_script="pmset displaysleepnow; $POPUP_OFF"
+
+# One item per AeroSpace workspace; plugins/aerospace.sh shows/hides them and
+# fills in app icons. Fired by exec-on-workspace-change in aerospace.toml.
+sketchybar --add event aerospace_workspace_change
+for sid in $(aerospace list-workspaces --all); do
+  sketchybar --add item space.$sid left \
+    --set space.$sid drawing=off icon=$sid \
+          icon.padding_left=10 icon.padding_right=15 padding_left=2 padding_right=2 \
+          icon.highlight_color=$RED label.padding_right=20 label.drawing=off \
+          label.font="sketchybar-app-font:Regular:16.0" \
+          label.background.height=26 label.background.drawing=on \
+          label.background.color=$BACKGROUND_2 label.background.corner_radius=8 \
+          click_script="aerospace workspace $sid"
+done
+sketchybar --add bracket spaces '/space\..*/' \
+  --set spaces background.color=$BACKGROUND_1 background.border_color=$BACKGROUND_2 \
+        background.border_width=2 background.drawing=on \
+  --add item aerospace left \
+  --set aerospace drawing=off updates=on script="$PLUGINS/aerospace.sh" \
+  --subscribe aerospace aerospace_workspace_change front_app_switched space_windows_change
+
+sketchybar --add item separator left \
+  --set separator icon= icon.font="MesloLGS Nerd Font:Regular:16.0" \
+        padding_left=17 padding_right=10 label.drawing=off \
+  --add item layout left \
+  --set layout icon=􀧍 icon.font="$FONT:Bold:16.0" icon.color=$ORANGE icon.width=30 \
+        label.drawing=off click_script='aerospace layout floating tiling' \
+  --add item front_app left \
+  --set front_app icon.drawing=off padding_left=0 label.font="$FONT:Black:12.0" \
+        script='sketchybar --set $NAME label="$INFO"' \
+  --subscribe front_app front_app_switched
+
+# ---- Right (first added is rightmost) ----
+
+sketchybar --add item calendar right \
+  --set calendar icon.font="$FONT:Black:12.0" icon.padding_right=0 \
+        label.width=45 label.align=right padding_left=15 update_freq=30 \
+        script='sketchybar --set $NAME icon="$(date "+%a %d. %b")" label="$(date +%H:%M)"' \
+  --subscribe calendar system_woke \
+  --add item brew right \
+  --set brew icon=􀐛 label=? padding_right=10 update_freq=1800 script="$PLUGINS/brew.sh" \
+  --add item github.bell right \
+  --set github.bell icon=􀋚 icon.font="$FONT:Bold:15.0" icon.color=$BLUE label=􀖇 \
+        update_freq=180 script="$PLUGINS/github.sh" \
+        click_script='open https://github.com/notifications' \
+  --add item battery right \
+  --set battery icon.font="$FONT:Regular:19.0" padding_left=0 padding_right=5 \
+        label.drawing=off update_freq=120 updates=on script="$PLUGINS/battery.sh" \
+  --subscribe battery power_source_change system_woke \
+  --add slider volume right \
+  --set volume updates=on icon.drawing=off label.drawing=off padding_left=0 padding_right=0 \
+        slider.highlight_color=$BLUE slider.background.height=5 \
+        slider.background.corner_radius=3 slider.background.color=$BACKGROUND_2 \
+        slider.knob=􀀁 script="$PLUGINS/volume.sh" \
+  --subscribe volume volume_change mouse.clicked \
+  --add item volume.icon right \
+  --set volume.icon icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
+        updates=on width=40 script="$PLUGINS/volume.sh" \
+  --subscribe volume.icon volume_change mouse.clicked \
+  --add bracket status brew github.bell battery volume volume.icon \
+  --set status background.color=$BACKGROUND_1 background.border_color=$BACKGROUND_2 \
+        background.border_width=2
+
+# CPU: top process (small, above) + load % + graph.
+sketchybar --add item cpu.top right \
+  --set cpu.top label.font="$FONT:Semibold:7" label=CPU icon.drawing=off \
+        width=0 padding_right=15 y_offset=6 \
+  --add item cpu.percent right \
+  --set cpu.percent label.font="$FONT:Heavy:12" label=CPU icon.drawing=off \
+        y_offset=-4 padding_right=15 width=55 update_freq=2 script="$PLUGINS/cpu.sh" \
+  --add graph cpu.graph right 75 \
+  --set cpu.graph graph.color=$BLUE graph.fill_color=$BLUE label.drawing=off icon.drawing=off \
+        background.height=30 background.drawing=on background.color=$TRANSPARENT
+
+sketchybar --update

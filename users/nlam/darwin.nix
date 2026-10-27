@@ -8,7 +8,20 @@
   environment.shells = [ pkgs.bashInteractive ];
   environment.systemPackages = [ pkgs.bashInteractive ];
 
+  # Config is users/nlam/sketchybar (linked by home-manager).
+  services.sketchybar = {
+    enable = true;
+    extraPackages = [ pkgs.sketchybar-app-font ]; # icon_map.sh for plugins/aerospace.sh
+  };
+  # Plugin scripts inherit this PATH: aerospace/brew live in Homebrew, gh/jq in home-manager.
+  launchd.user.agents.sketchybar.path = [
+    "/opt/homebrew/bin"
+    "/etc/profiles/per-user/nlam/bin"
+  ];
+  fonts.packages = [ pkgs.sketchybar-app-font ];
+
   system.defaults.NSGlobalDomain = {
+    _HIHideMenuBar = true; # sketchybar replaces it
     AppleInterfaceStyle = "Dark";
     ApplePressAndHoldEnabled = false; # repeat on hold, no accent popup
     KeyRepeat = 2; # fastest on the Settings slider

@@ -44,6 +44,7 @@
       "claude"
       "discord"
       "font-meslo-lg-nerd-font"
+      "font-sf-pro" # SF Symbols glyphs used by sketchybar
       "font-symbols-only-nerd-font"
       "ghostty"
       "jetbrains-toolbox"

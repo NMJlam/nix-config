@@ -24,6 +24,12 @@ in
     executable = true;
   };
 
+  # The launchd agent is services.sketchybar in darwin.nix; it reads ~/.config/sketchybar.
+  xdg.configFile."sketchybar" = lib.mkIf isDarwin {
+    source = ./sketchybar;
+    recursive = true;
+  };
+
   # Claude Code rewrites its own settings.json (/model, /config), so it can't be a
   # read-only store symlink. Merge ours over it instead: these keys win, the rest survive.
   home.activation.claudeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
