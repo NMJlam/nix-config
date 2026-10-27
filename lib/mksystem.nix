@@ -1,4 +1,8 @@
-# Builds a NixOS or nix-darwin system from machines/<name>.nix and users/<user>/.
+# Builds a NixOS or nix-darwin system. Each system is put together from:
+#   modules/                      system config for every machine
+#   machines/<name>/              config for this machine only
+#   users/<user>/{nixos,darwin}/  the user's system config for this OS
+#   users/<user>/home/            the user's home-manager config, the same on every machine
 { inputs }:
 
 name:
@@ -17,20 +21,11 @@ systemFunc {
     {
       nixpkgs.hostPlatform = system;
       system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-
-      # Prebuilt binaries for the claude-code flake input.
-      nix.settings.extra-substituters = [ "https://claude-code.cachix.org" ];
-      nix.settings.extra-trusted-public-keys = [
-        "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
-      ];
     }
 
-    ../machines/${name}.nix
-    ../users/${user}/${if darwin then "darwin" else "nixos"}.nix
-
-    (if darwin then { system.primaryUser = user; } else { })
-    (if darwin then inputs.nix-homebrew.darwinModules.nix-homebrew else { })
-    (if darwin then { nix-homebrew.user = user; } else { })
+    ../modules/nix.nix
+    ../machines/${name}
+    ../users/${user}/${if darwin then "darwin" else "nixos"}
 
     hmModules.home-manager
     {
@@ -40,8 +35,14 @@ systemFunc {
       # *.hm-backup instead of stopping the switch with "would be clobbered".
       home-manager.backupFileExtension = "hm-backup";
       home-manager.extraSpecialArgs = { inherit inputs; };
-      home-manager.users.${user} = import ../users/${user}/home-manager.nix;
+      home-manager.users.${user} = import ../users/${user}/home;
+    }
+  ]
+  ++ inputs.nixpkgs.lib.optionals darwin [
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+    {
+      system.primaryUser = user;
+      nix-homebrew.user = user;
     }
   ];
-
 }

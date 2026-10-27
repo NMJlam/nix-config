@@ -32,5 +32,9 @@
         user = "nlam";
         darwin = true;
       };
+
+      # `nix fmt`
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
     };
 }

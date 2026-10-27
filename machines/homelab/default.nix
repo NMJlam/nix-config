@@ -2,7 +2,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./hardware/homelab.nix ];
+  imports = [ ./hardware.nix ];
 
   networking.hostName = "homelab";
   networking.networkmanager.enable = true;
@@ -12,10 +12,6 @@
 
   services.openssh.enable = true;
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
   environment.systemPackages = [
     pkgs.git
     # So TERM=xterm-ghostty works when SSHing in from Ghostty on the Mac.

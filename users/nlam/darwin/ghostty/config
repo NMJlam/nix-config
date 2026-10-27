@@ -1,4 +1,4 @@
-# Ghostty config, managed by the flake (users/nlam/home-manager.nix).
+# Ghostty config, managed by the flake (users/nlam/home/ghostty).
 # Docs: https://ghostty.org/docs/config
 
 theme = "Catppuccin Mocha"

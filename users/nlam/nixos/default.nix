@@ -1,3 +1,4 @@
+# nlam on NixOS (the homelab).
 { ... }:
 
 {
