@@ -1,4 +1,4 @@
-# Ghostty config, managed by the flake (users/nlam/home/ghostty).
+# Ghostty config, managed by the flake (users/nlam/darwin/ghostty).
 # Docs: https://ghostty.org/docs/config
 
 theme = "Catppuccin Mocha"
