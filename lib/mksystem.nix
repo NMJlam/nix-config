@@ -8,7 +8,8 @@
 name:
 {
   system,
-  user,
+  user, # folder under users/
+  username ? user, # login name, passed to every module
   darwin ? false,
 }:
 
@@ -17,6 +18,7 @@ let
   hmModules = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in
 systemFunc {
+  specialArgs = { inherit username; };
   modules = [
     {
       nixpkgs.hostPlatform = system;
@@ -35,14 +37,14 @@ systemFunc {
       # *.hm-backup instead of stopping the switch with "would be clobbered".
       home-manager.backupFileExtension = "hm-backup";
       home-manager.extraSpecialArgs = { inherit inputs; };
-      home-manager.users.${user} = import ../users/${user}/home;
+      home-manager.users.${username} = import ../users/${user}/home;
     }
   ]
   ++ inputs.nixpkgs.lib.optionals darwin [
     inputs.nix-homebrew.darwinModules.nix-homebrew
     {
-      system.primaryUser = user;
-      nix-homebrew.user = user;
+      system.primaryUser = username;
+      nix-homebrew.user = username;
     }
   ];
 }

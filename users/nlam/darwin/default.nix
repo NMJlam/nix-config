@@ -1,6 +1,6 @@
 # nlam on macOS. Each Mac-only tool is one module here; it owns its Homebrew
 # install, system settings and home-manager files, so deleting it removes the tool.
-{ ... }:
+{ username, ... }:
 
 {
   imports = [
@@ -14,5 +14,5 @@
     ./sketchybar
   ];
 
-  users.users.nlam.home = "/Users/nlam";
+  users.users.${username}.home = "/Users/${username}";
 }

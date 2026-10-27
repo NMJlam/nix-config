@@ -1,5 +1,5 @@
 # Neru keyboard-driven navigation: the Homebrew cask plus its config.
-{ ... }:
+{ username, ... }:
 
 {
   homebrew.taps = [
@@ -10,5 +10,5 @@
   ];
   homebrew.casks = [ "y3owk1n/tap/neru" ];
 
-  home-manager.users.nlam.xdg.configFile."neru/config.toml".source = ./config.toml;
+  home-manager.users.${username}.xdg.configFile."neru/config.toml".source = ./config.toml;
 }

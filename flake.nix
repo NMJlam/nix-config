@@ -30,6 +30,7 @@
       darwinConfigurations.macbook = mkSystem "macbook" {
         system = "aarch64-darwin";
         user = "nlam";
+        # username = ""  NOTE: configure for a new user other than "nlam"
         darwin = true;
       };
 

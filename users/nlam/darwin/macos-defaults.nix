@@ -1,5 +1,5 @@
 # macOS System Settings: keyboard, dock, window restore.
-{ ... }:
+{ username, ... }:
 
 {
   system.defaults.NSGlobalDomain = {
@@ -20,7 +20,7 @@
   # Untick "Reopen windows when logging back in". It lives in a ByHost plist,
   # which system.defaults can't target.
   system.activationScripts.postActivation.text = ''
-    launchctl asuser "$(id -u -- nlam)" sudo --user=nlam -- \
+    launchctl asuser "$(id -u -- ${username})" sudo --user=${username} -- \
       defaults -currentHost write com.apple.loginwindow TALLogoutSavesState -bool false
   '';
 }

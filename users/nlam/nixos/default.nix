@@ -1,8 +1,8 @@
 # nlam on NixOS (the homelab).
-{ ... }:
+{ username, ... }:
 
 {
-  users.users.nlam = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
       "wheel"

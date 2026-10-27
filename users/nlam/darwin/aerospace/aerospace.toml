@@ -6,7 +6,7 @@
 # Start JankyBorders with window borders (Catppuccin Mocha — matches ghostty theme)
 after-startup-command = [
   'exec-and-forget borders active_color=0xffcba6f7 inactive_color=0xff45475a width=5.0',
-  'exec-and-forget /Users/nlam/.config/aerospace/startup.sh'
+  'exec-and-forget ~/.config/aerospace/startup.sh'
 ]
 
 # Tell sketchybar to redraw its workspace list (plugins/aerospace.sh).
