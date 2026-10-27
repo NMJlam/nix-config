@@ -9,6 +9,11 @@ after-startup-command = [
   'exec-and-forget /Users/nlam/.config/aerospace/startup.sh'
 ]
 
+# Tell sketchybar to redraw its workspace list (plugins/aerospace.sh).
+exec-on-workspace-change = ['/bin/bash', '-c',
+  '/run/current-system/sw/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
 # Start AeroSpace at login
 start-at-login = true 
 
@@ -58,10 +63,10 @@ automatically-unhide-macos-hidden-apps = false
 [gaps]
     inner.horizontal = 10
     inner.vertical =   5
-    outer.left =      5
-    outer.bottom =    5 
-    outer.top =      5
-    outer.right =    5 
+    outer.left =     10 
+    outer.bottom =   10 
+    outer.top =      59 # sketchybar y_offset 10 + height 39 + 10, same as the other edges
+    outer.right =   10 
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
