@@ -1,0 +1,25 @@
+" Set Space as your leader key
+let mapleader=" "
+
+" Map <Space>ff to Find File
+nmap <leader>ff <Action>(GotoFile)
+
+" Map <Space>fg to Find Text in Files
+nmap <leader>fg <Action>(FindInPath)
+
+
+" Move smoothly between open editor splits using Ctrl + h/j/k/l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+" Map <Space>q to show the combined error info and documentation popup
+nmap <leader>q <Action>(ShowHoverInfo)
+
+" Tab → next editor tab
+nnoremap <Tab> :action NextTab<CR>
+
+" Shift + Tab → previous editor tab
+nnoremap <S-Tab> :action PreviousTab<CR>
+map <leader>ra <Action>(RenameElement)
