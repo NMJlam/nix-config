@@ -65,7 +65,7 @@ automatically-unhide-macos-hidden-apps = false
     inner.vertical =   5
     outer.left =     10 
     outer.bottom =   10 
-    outer.top =      59 # sketchybar y_offset 10 + height 39 + 10, same as the other edges
+    outer.top =      30 # sketchybar y_offset 10 + height 39 + 10, same as the other edges
     outer.right =   10 
 
 # 'main' binding mode declaration
