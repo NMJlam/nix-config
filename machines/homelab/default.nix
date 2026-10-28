@@ -1,8 +1,21 @@
 # Minisforum homelab
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  imports = [ ./hardware.nix ];
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+    ./hardware.nix
+    ./homelab.nix
+    ./network/traefik.nix
+    ./network/tailscale.nix
+    # Needs the real tunnel token in secrets.yaml first, or the unit restart-loops.
+    # ./network/cloudflared.nix
+    ./apps/whoami.nix
+  ];
+
+  # Encrypted to the keys in /.sops.yaml; decrypted at activation with this machine's SSH host key.
+  # Edit with `sops machines/homelab/secrets.yaml`.
+  sops.defaultSopsFile = ./secrets.yaml;
 
   networking.hostName = "homelab";
   networking.networkmanager.enable = true;
