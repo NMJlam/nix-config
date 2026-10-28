@@ -8,6 +8,9 @@
   services.tailscale = {
     enable = true;
     authKeyFile = config.sops.secrets.tailscale-auth-key.path;
+    # Tailscale SSH: `ssh homelab` from any tailnet device, authenticated by tailnet identity,
+    # so no SSH keys or ~/.ssh/config entries (MagicDNS resolves the hostname).
+    extraSetFlags = [ "--ssh" ];
     openFirewall = true; # UDP 41641, so devices connect directly instead of through relays
   };
 

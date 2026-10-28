@@ -75,12 +75,16 @@ sketchybar --add item calendar right \
         label.width=45 label.align=right padding_left=15 update_freq=30 \
         script='sketchybar --set $NAME icon="$(date "+%a %d. %b")" label="$(date +%H:%M)"' \
   --subscribe calendar system_woke \
-  --add item brew right \
-  --set brew icon=􀐛 label=? padding_right=10 update_freq=1800 script="$PLUGINS/brew.sh" \
-  --add item github.bell right \
-  --set github.bell icon=􀋚 icon.font="$FONT:Bold:15.0" icon.color=$BLUE label=􀖇 \
-        update_freq=180 script="$PLUGINS/github.sh" \
-        click_script='open https://github.com/notifications' \
+  --add item tailscale right \
+  --set tailscale icon=󰖂 icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
+        padding_right=10 update_freq=30 script="$PLUGINS/tailscale.sh" \
+        click_script='open -a Tailscale' \
+  --subscribe tailscale system_woke \
+  --add item bluetooth right \
+  --set bluetooth icon=󰂯 icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
+        update_freq=30 script="$PLUGINS/bluetooth.sh" \
+        click_script="open 'x-apple.systempreferences:com.apple.BluetoothSettings'" \
+  --subscribe bluetooth system_woke \
   --add item battery right \
   --set battery icon.font="$FONT:Regular:19.0" padding_left=0 padding_right=5 \
         label.drawing=off update_freq=120 updates=on script="$PLUGINS/battery.sh" \
@@ -95,7 +99,7 @@ sketchybar --add item calendar right \
   --set volume.icon icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
         updates=on width=40 script="$PLUGINS/volume.sh" \
   --subscribe volume.icon volume_change mouse.clicked \
-  --add bracket status brew github.bell battery volume volume.icon \
+  --add bracket status tailscale bluetooth battery volume volume.icon \
   --set status background.color=$BACKGROUND_1 background.border_color=$BACKGROUND_2 \
         background.border_width=2
 
