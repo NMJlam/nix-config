@@ -14,6 +14,10 @@
 
     # Installs Homebrew itself on the MacBook (nix-darwin's homebrew.* only manages packages).
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    # Decrypts the homelab's committed secrets at activation; values never reach /nix/store.
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

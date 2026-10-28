@@ -18,7 +18,7 @@ let
   hmModules = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in
 systemFunc {
-  specialArgs = { inherit username; };
+  specialArgs = { inherit inputs username; };
   modules = [
     {
       nixpkgs.hostPlatform = system;

@@ -25,6 +25,7 @@
       nmap
       poppler-utils
       rustup
+      sops # edits machines/homelab/secrets.yaml
       tldr
       tree-sitter
       uv
