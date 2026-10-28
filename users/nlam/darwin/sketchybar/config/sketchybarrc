@@ -58,7 +58,7 @@ sketchybar --add bracket spaces '/space\..*/' \
   --subscribe aerospace aerospace_workspace_change front_app_switched space_windows_change
 
 sketchybar --add item separator left \
-  --set separator icon= icon.font="MesloLGS Nerd Font:Regular:16.0" \
+  --set separator icon= icon.font="MesloLGS Nerd Font:Regular:16.0" \
         padding_left=17 padding_right=10 label.drawing=off \
   --add item layout left \
   --set layout icon=􀧍 icon.font="$FONT:Bold:16.0" icon.color=$ORANGE icon.width=30 \
