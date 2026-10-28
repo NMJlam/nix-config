@@ -20,10 +20,10 @@ case "$NAME:$SENDER" in
   volume.icon:*)
     v=${INFO:-$(get_volume)}
     case $v in
-      0) icon=󰖁 ;;
-      [0-9] | [1-2][0-9]) icon=󰕿 ;;
-      [3-5][0-9]) icon=󰖀 ;;
-      *) icon=󰕾 ;;
+      0) icon=􀊣 ;;
+      [0-9] | [1-2][0-9] | 3[0-2]) icon=􀊥 ;;
+      3[3-9] | [4-5][0-9] | 6[0-5]) icon=􀊧 ;;
+      *) icon=􀊩 ;;
     esac
     sketchybar --set volume.icon icon="$icon"
     ;;

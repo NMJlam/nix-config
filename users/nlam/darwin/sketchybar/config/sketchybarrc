@@ -70,24 +70,26 @@ sketchybar --add item separator left \
 
 # ---- Right (first added is rightmost) ----
 
+# Status icons share one spacing so the bracket edges match the left side.
+STATUS="label.drawing=off padding_left=2 padding_right=2 icon.padding_left=10 icon.padding_right=10"
+
 sketchybar --add item calendar right \
   --set calendar icon.font="$FONT:Black:12.0" icon.padding_right=0 \
         label.width=45 label.align=right padding_left=15 update_freq=30 \
         script='sketchybar --set $NAME icon="$(date "+%a %d. %b")" label="$(date +%H:%M)"' \
   --subscribe calendar system_woke \
   --add item tailscale right \
-  --set tailscale icon=󰖂 icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
-        padding_right=10 update_freq=30 script="$PLUGINS/tailscale.sh" \
-        click_script='open -a Tailscale' \
+  --set tailscale $STATUS icon=󰖂 icon.font="MesloLGS Nerd Font:Regular:16.0" \
+        update_freq=30 script="$PLUGINS/tailscale.sh" click_script='open -a Tailscale' \
   --subscribe tailscale system_woke \
   --add item bluetooth right \
-  --set bluetooth icon=󰂯 icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
+  --set bluetooth $STATUS icon=󰂯 icon.font="MesloLGS Nerd Font:Regular:16.0" \
         update_freq=30 script="$PLUGINS/bluetooth.sh" \
         click_script="open 'x-apple.systempreferences:com.apple.BluetoothSettings'" \
   --subscribe bluetooth system_woke \
   --add item battery right \
-  --set battery icon.font="$FONT:Regular:19.0" padding_left=0 padding_right=5 \
-        label.drawing=off update_freq=120 updates=on script="$PLUGINS/battery.sh" \
+  --set battery $STATUS icon.font="$FONT:Regular:19.0" \
+        update_freq=120 updates=on script="$PLUGINS/battery.sh" \
   --subscribe battery power_source_change system_woke \
   --add slider volume right \
   --set volume updates=on icon.drawing=off label.drawing=off padding_left=0 padding_right=0 \
@@ -96,12 +98,12 @@ sketchybar --add item calendar right \
         slider.knob=􀀁 script="$PLUGINS/volume.sh" \
   --subscribe volume volume_change mouse.clicked \
   --add item volume.icon right \
-  --set volume.icon icon.font="MesloLGS Nerd Font:Regular:16.0" label.drawing=off \
-        updates=on width=40 script="$PLUGINS/volume.sh" \
+  --set volume.icon $STATUS icon.font="$FONT:Regular:16.0" width=44 padding_right=8 \
+        updates=on script="$PLUGINS/volume.sh" \
   --subscribe volume.icon volume_change mouse.clicked \
   --add bracket status tailscale bluetooth battery volume volume.icon \
   --set status background.color=$BACKGROUND_1 background.border_color=$BACKGROUND_2 \
-        background.border_width=2
+        background.border_width=2 background.drawing=on
 
 # CPU: top process (small, above) + load % + graph.
 sketchybar --add item cpu.top right \
