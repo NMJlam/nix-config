@@ -3,11 +3,10 @@
 keys:
   # ~/Library/Application Support/sops/age/keys.txt on the MacBook. Back it up outside the repo.
   - &nlam age1rldnah2matrj0e4uv7sf4jpdsxkjw0pe89ljw3u7t5jdgrrd6dgsxvgm7u
-  # TODO: homelab's SSH host key: `ssh <host> cat /etc/ssh/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age`
-  # - &homelab age1...
+  - &homelab age1cht7sthsmdsmf0hvggsj3egxnqmhzewrqzdf806pglg5cg8ya3ysk4l2rr
 creation_rules:
   - path_regex: machines/homelab/secrets\.yaml$
     key_groups:
       - age:
           - *nlam
-          # - *homelab
+          - *homelab
