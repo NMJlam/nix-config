@@ -8,8 +8,7 @@
     ./homelab.nix
     ./network/traefik.nix
     ./network/tailscale.nix
-    # Needs the real tunnel token in secrets.yaml first, or the unit restart-loops.
-    # ./network/cloudflared.nix
+    ./network/cloudflared.nix
     ./apps/whoami.nix
   ];
 
