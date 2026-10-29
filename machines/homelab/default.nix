@@ -22,7 +22,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Still needed: sops-nix decrypts with its ed25519 host key. Logins go through Tailscale SSH,
+  # so port 22 stays closed on the LAN.
   services.openssh.enable = true;
+  services.openssh.openFirewall = false;
 
   environment.systemPackages = [
     pkgs.git

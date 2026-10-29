@@ -10,7 +10,6 @@
       btop
       cmake
       cmatrix
-      eza
       fd
       ffmpeg
       gh
@@ -20,7 +19,6 @@
       just
       lavat
       lazygit
-      lsd
       neovim
       nmap
       poppler-utils

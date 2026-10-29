@@ -14,4 +14,11 @@
       "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
     ];
   };
+
+  # Weekly, so /nix/store doesn't grow with every rebuild.
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+  nix.optimise.automatic = true;
 }
