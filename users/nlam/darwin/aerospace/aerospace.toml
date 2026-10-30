@@ -65,7 +65,9 @@ automatically-unhide-macos-hidden-apps = false
     inner.vertical =   5
     outer.left =     10 
     outer.bottom =   10 
-    outer.top =      30 # sketchybar y_offset 10 + height 39 + 10, same as the other edges
+    # sketchybar y_offset 10 + height 39 + 10 = 59. The notched built-in display already
+    # reserves the menu bar strip even when hidden, so it only needs 30 on top of that.
+    outer.top =      [{ monitor."built-in" = 40 }, 59]
     outer.right =   10 
 
 # 'main' binding mode declaration
