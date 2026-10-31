@@ -1,5 +1,5 @@
 # Terminal tools installed on every machine. Tools with config of their own live in
-# their own module (claude-code/, neovim.nix, starship/, tmux.nix; zoxide/fzf/yazi in bash.nix).
+# their own module (claude-code/, herdr/, neovim.nix, starship/, tmux.nix; zoxide/fzf/yazi in bash.nix).
 { lib, pkgs, ... }:
 
 {

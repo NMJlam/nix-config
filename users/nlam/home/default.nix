@@ -6,6 +6,7 @@
   imports = [
     ./bash.nix
     ./claude-code
+    ./herdr
     ./neovim.nix
     ./packages.nix
     ./readline.nix

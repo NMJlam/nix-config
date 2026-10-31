@@ -1,0 +1,69 @@
+# Ported from ../tmux.nix. Most of it is already Herdr's default: prefix ctrl+b,
+# prefix+h/j/k/l focus, prefix+x close, tabs numbered from 1, prefix+[ copy mode.
+# Read-only symlink from the flake, so the settings screen (prefix+s) can't save.
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[ui]
+# tmux active window was catppuccin mauve.
+accent = "#cba6f7"
+# Gapped, rounded panes with an agent header and status dot per pane.
+pane_gaps = true
+pane_borders = "auto"
+pane_outer_borders = true
+pane_scrollbars = false
+show_agent_labels_on_pane_borders = true
+
+[keys]
+# ctrl+shift+hjkl splits toward that side.
+split_vertical = ["prefix+v", "ctrl+shift+l"]
+split_horizontal = ["prefix+minus", "ctrl+shift+j"]
+# Sidebar (navigate mode): j/k move between spaces, ctrl+j/k between panes.
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+# Freed for the move-pane commands below.
+swap_pane_left = []
+swap_pane_down = []
+swap_pane_up = []
+swap_pane_right = []
+
+# Herdr only splits right/down, so left/up split that way and swap the new pane over.
+[[keys.command]]
+key = "ctrl+shift+h"
+type = "shell"
+command = '''new=$("$HERDR_BIN_PATH" pane split "$HERDR_ACTIVE_PANE_ID" --direction right | sed -n 's/.*"pane_id":"\([^"]*\)".*/\1/p') && "$HERDR_BIN_PATH" pane swap --source-pane "$new" --target-pane "$HERDR_ACTIVE_PANE_ID"'''
+description = "split left"
+
+[[keys.command]]
+key = "ctrl+shift+k"
+type = "shell"
+command = '''new=$("$HERDR_BIN_PATH" pane split "$HERDR_ACTIVE_PANE_ID" --direction down | sed -n 's/.*"pane_id":"\([^"]*\)".*/\1/p') && "$HERDR_BIN_PATH" pane swap --source-pane "$new" --target-pane "$HERDR_ACTIVE_PANE_ID"'''
+description = "split up"
+
+# prefix+shift+hjkl moves the pane that way like aerospace, replacing Herdr's swap_pane_*.
+# Moving off an edge flips the split, e.g. prefix+L on a stacked pair puts them side by side.
+[[keys.command]]
+key = "prefix+shift+h"
+type = "shell"
+command = 'sh "$HOME/.config/herdr/move-pane.sh" left'
+description = "move pane left"
+
+[[keys.command]]
+key = "prefix+shift+j"
+type = "shell"
+command = 'sh "$HOME/.config/herdr/move-pane.sh" down'
+description = "move pane down"
+
+[[keys.command]]
+key = "prefix+shift+k"
+type = "shell"
+command = 'sh "$HOME/.config/herdr/move-pane.sh" up'
+description = "move pane up"
+
+[[keys.command]]
+key = "prefix+shift+l"
+type = "shell"
+command = 'sh "$HOME/.config/herdr/move-pane.sh" right'
+description = "move pane right"
