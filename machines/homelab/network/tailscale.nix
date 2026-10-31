@@ -1,19 +1,21 @@
-# Private access from my devices. Joins the tailnet on its own with the auth key from secrets.yaml
-# (a reusable, pre-approved key from the Tailscale admin console).
-{ config, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
-  sops.secrets.tailscale-auth-key = { };
+  sops.secrets.tailscale-auth-key = { }; # optional: delete with the line below
 
   services.tailscale = {
     enable = true;
-    authKeyFile = config.sops.secrets.tailscale-auth-key.path;
-    # Tailscale SSH: `ssh homelab` from any tailnet device, authenticated by tailnet identity,
-    # so no SSH keys or ~/.ssh/config entries (MagicDNS resolves the hostname).
+    # Stable 26.05 ships 1.98.10; 1.104.4+ fixes the Tailscale SSH bugs.
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tailscale;
+    authKeyFile = config.sops.secrets.tailscale-auth-key.path; # optional: delete
     extraSetFlags = [ "--ssh" ];
-    openFirewall = true; # UDP 41641, so devices connect directly instead of through relays
+    openFirewall = true;
   };
 
-  # Traefik's private entry point, reachable over the tailnet only.
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 443 ];
 }
