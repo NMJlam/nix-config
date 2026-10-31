@@ -27,4 +27,3 @@ keybind = shift+enter=text:\x1b\r
 
 # no-cursor: let bash readline set the cursor (block in vi normal, bar in insert)
 shell-integration-features = no-cursor,ssh-env,ssh-terminfo
-keybind = ctrl+left_bracket=text:\x1b
