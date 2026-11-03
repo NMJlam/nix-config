@@ -32,6 +32,11 @@
     ]
     # The Mac gets bun from Homebrew instead (users/nlam/darwin/homebrew.nix): the bun-installed
     # omp in ~/.bun/bin needs a newer bun than nixpkgs 26.05 ships.
-    ++ lib.optionals (!pkgs.stdenv.isDarwin) [ bun ]
+    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+      bazelisk
+      # bazelisk only ships `bazelisk`; this lets `bazel` pick the version in .bazelversion too.
+      (writeShellScriptBin "bazel" ''exec ${bazelisk}/bin/bazelisk "$@"'')
+      bun
+    ]
     ++ lib.optionals pkgs.stdenv.isDarwin [ nodejs ];
 }
