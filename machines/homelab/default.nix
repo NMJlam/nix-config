@@ -27,6 +27,8 @@
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
 
+  virtualisation.docker.enable = true;
+
   environment.systemPackages = [
     pkgs.git
     # So TERM=xterm-ghostty works when SSHing in from Ghostty on the Mac.

@@ -7,6 +7,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "docker" # root-equivalent; fine on a single-user box
     ];
   };
 }
