@@ -22,6 +22,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # CPU boost (CPB) causes kernel oopses and hard freezes on this box. The BIOS toggle
+  # has reset itself before, so turn boost off from the OS too.
+  systemd.tmpfiles.rules = [ "w /sys/devices/system/cpu/cpufreq/boost - - - - 0" ];
+
   # Still needed: sops-nix decrypts with its ed25519 host key. Logins go through Tailscale SSH,
   # so port 22 stays closed on the LAN.
   services.openssh.enable = true;
