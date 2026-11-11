@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "cursor-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795247883,
+        "narHash": "sha256-Vc1sLJs2MLDlOJ5jVsVXfakHp8+VX0o74aXOrUH4aZ8=",
+        "owner": "cursor",
+        "repo": "plugins",
+        "rev": "792440e8a560a4a3f63748cdee70491ecd412982",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cursor",
+        "repo": "plugins",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -54,6 +70,39 @@
         "owner": "nix-community",
         "ref": "release-26.05",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "janestreet-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794933351,
+        "narHash": "sha256-EuYu0C7d2T4Y3RlsTm5/22jZcCrrTPpdnGhcx7SOOeM=",
+        "owner": "janestreet",
+        "repo": "agent_skills",
+        "rev": "469868f4489cbdbe178c775a0af05bb6bef63689",
+        "type": "github"
+      },
+      "original": {
+        "owner": "janestreet",
+        "ref": "master",
+        "repo": "agent_skills",
+        "type": "github"
+      }
+    },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795095298,
+        "narHash": "sha256-fc5+qmchp1IQ/rQP1olWKC1eC4VdYhaB7YYzC3+JBe0=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "abeeaf95660ba9e8b7c753eb38f441ca707a8823",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
         "type": "github"
       }
     },
@@ -147,7 +196,10 @@
     "root": {
       "inputs": {
         "claude-code": "claude-code",
+        "cursor-plugins": "cursor-plugins",
         "home-manager": "home-manager",
+        "janestreet-skills": "janestreet-skills",
+        "mattpocock-skills": "mattpocock-skills",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",

@@ -5,7 +5,7 @@
 {
   imports = [
     ./bash.nix
-    ./claude-code
+    ./agents
     ./herdr
     ./neovim.nix
     ./packages.nix

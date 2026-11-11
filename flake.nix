@@ -13,6 +13,20 @@
     # Not following our nixpkgs so the claude-code.cachix.org binaries still match.
     claude-code.url = "github:sadjow/claude-code-nix";
 
+    # Skills linked straight from upstream's default branch (users/nlam/home/agents/skills); `nix flake update` takes the new HEAD.
+    janestreet-skills = {
+      url = "github:janestreet/agent_skills/master";
+      flake = false;
+    };
+    cursor-plugins = {
+      url = "github:cursor/plugins";
+      flake = false;
+    };
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
+
     # Installs Homebrew itself on the MacBook (nix-darwin's homebrew.* only manages packages).
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 

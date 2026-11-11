@@ -1,0 +1,14 @@
+{
+  "enabledPlugins": {
+    "camoufox@camoufox-mcp": true
+  },
+  "extraKnownMarketplaces": {
+    "camoufox-mcp": {
+      "source": {
+        "source": "github",
+        "repo": "whit3rabbit/camoufox-mcp"
+      },
+      "autoUpdate": true
+    }
+  }
+}

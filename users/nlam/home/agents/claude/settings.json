@@ -1,0 +1,84 @@
+{
+  "model": "opus",
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "pstack@cursor-plugins": true,
+    "caveman@caveman": true,
+    "claude-security@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      },
+      "autoUpdate": true
+    },
+    "cursor-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "cursor/plugins"
+      },
+      "autoUpdate": true
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      },
+      "autoUpdate": true
+    }
+  },
+  "env": {
+    "PONYTAIL_DEFAULT_MODE": "off"
+  },
+  "permissions": {
+    "deny": [
+      "Skill(ponytail:ponytail)",
+      "Skill(ponytail:ponytail-audit)",
+      "Skill(ponytail:ponytail-debt)",
+      "Skill(ponytail:ponytail-gain)",
+      "Skill(ponytail:ponytail-help)",
+      "Skill(ponytail:ponytail-review)",
+      "Skill(caveman:cavecrew)",
+      "Skill(caveman:caveman-compress)",
+      "Skill(caveman:caveman-discover)",
+      "Skill(caveman:caveman-evidence-review)",
+      "Skill(caveman:caveman-explore)",
+      "Skill(caveman:caveman-help)",
+      "Skill(caveman:caveman-init)",
+      "Skill(caveman:caveman-learn)",
+      "Skill(caveman:caveman-manage)",
+      "Skill(caveman:caveman-optimize)",
+      "Skill(caveman:caveman-review)",
+      "Skill(caveman:caveman-setup)",
+      "Skill(caveman:caveman-stats)",
+      "Skill(caveman:investigate-first)",
+      "Skill(caveman:lean-build)",
+      "Skill(caveman:migration)",
+      "Skill(caveman:safe-refactor)",
+      "Skill(caveman:surgical-patch)",
+      "Skill(caveman:verify-and-stop)",
+      "Agent(caveman:cavecrew-builder)",
+      "Agent(caveman:cavecrew-investigator)",
+      "Agent(caveman:cavecrew-reviewer)"
+    ]
+  },
+  "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen",
+  "editorMode": "vim",
+  "autoCompactEnabled": true,
+  "theme": "dark",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}
