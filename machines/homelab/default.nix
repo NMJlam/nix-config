@@ -10,6 +10,7 @@
     ./network/tailscale.nix
     ./network/cloudflared.nix
     ./apps/whoami.nix
+    ./apps/changedetection.nix
   ];
 
   # Encrypted to the keys in /.sops.yaml; decrypted at activation with this machine's SSH host key.

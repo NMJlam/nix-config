@@ -22,13 +22,16 @@ in
       entryPoints = {
         private = {
           address = ":443";
-          # One wildcard cert, so CT logs show *.home.<domain> instead of each app's name.
+          # One wildcard cert, so CT logs show *.<domain> instead of each app's name.
           http.tls = {
             certResolver = "cloudflare";
             domains = [
               {
-                main = "home.${domain}";
-                sans = [ "*.home.${domain}" ];
+                main = domain;
+                sans = [
+                  "*.${domain}"
+                  "*.home.${domain}"
+                ];
               }
             ];
           };
